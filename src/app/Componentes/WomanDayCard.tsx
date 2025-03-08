@@ -26,7 +26,7 @@ export default function WomenDayCard() {
   Com todo o meu amor,
   
   Arley`;
-  const photos = ["/foto1.jpg", "/foto2.jpg", "/foto3.jpg"]; // Caminhos das 3 fotos
+  const photos = ["foto1.jpg", "foto2.jpg", "foto3.jpg"]; // Caminhos das 3 fotos
   const lovePhrases = [
     "Sem você, não há vida.",
     "Cada momento com você é precioso.",
@@ -134,7 +134,7 @@ export default function WomenDayCard() {
                 }}
               />
               <motion.img
-                src="/SophiaFoto.png"
+                src="SophiaFoto.png"
                 alt="Sophia"
                 className="w-full rounded-lg mb-4 relative z-10 w-full rounded-lg mb-4 relative z-10"
                 initial={{ opacity: 0 }}
@@ -252,7 +252,7 @@ export default function WomenDayCard() {
         </div>
       )}
 
-      <audio ref={audioRef} src="/musica.mp3" loop className="hidden"></audio>
+      <audio ref={audioRef} src="musica.mp3" loop className="hidden"></audio>
     </div>
   );
 }
