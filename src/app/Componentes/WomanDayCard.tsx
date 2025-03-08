@@ -8,10 +8,10 @@ export default function WomenDayCard() {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [countdown, setCountdown] = useState(5); // Estado para a contagem regressiva
-  const [showPhotos, setShowPhotos] = useState(false); // Estado para exibir as fotos
-  const [photoIndex, setPhotoIndex] = useState(0); // Índice da foto atual
-  const [currentPhrase, setCurrentPhrase] = useState(""); // Frase amorosa
+  const [countdown, setCountdown] = useState(5); 
+  const [showPhotos, setShowPhotos] = useState(false); 
+  const [photoIndex, setPhotoIndex] = useState(0); 
+  const [currentPhrase, setCurrentPhrase] = useState(""); 
   const audioRef = useRef<HTMLAudioElement>(null);
   const romanticMessage = `Minha amada Sophia,
 
@@ -26,12 +26,12 @@ export default function WomenDayCard() {
   Com todo o meu amor,
   
   Arley`;
-  const photos = ["foto1.jpg", "foto2.jpg", "foto3.jpg"]; // Caminhos das 3 fotos
+  const photos = ["foto1.jpg", "foto2.jpg", "foto3.jpg"]; 
   const lovePhrases = [
     "Sem você, não há vida.",
     "Cada momento com você é precioso.",
     "Sem você, não há sol.",
-  ]; // Frases de amor
+  ]; 
 
   const messageRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +45,7 @@ export default function WomenDayCard() {
           clearInterval(interval);
         }
   
-        // 🔽 Garante que o scroll do CardContent vá para o final
+        
         if (messageRef.current) {
           messageRef.current.scrollTop = messageRef.current.scrollHeight;
         }
@@ -59,13 +59,13 @@ export default function WomenDayCard() {
 
   useEffect(() => {
     if (showHeart) {
-      // Iniciar a contagem regressiva após o coração ser exibido
+    
       const countdownInterval = setInterval(() => {
         setCountdown((prev) => {
           if (prev === 1) {
             clearInterval(countdownInterval);
-            setShowPhotos(true); // Mostrar as fotos quando a contagem chegar a 0
-            setShowHeart(false); // O coração desaparece
+            setShowPhotos(true);
+            setShowHeart(false); 
             return 0;
           }
           return prev - 1;
@@ -78,16 +78,16 @@ export default function WomenDayCard() {
 
   useEffect(() => {
     if (showPhotos) {
-      // Define a frase imediatamente para a primeira foto
+     
       setCurrentPhrase(lovePhrases[0]);
   
       const photoInterval = setInterval(() => {
         setPhotoIndex((prev) => {
           const newIndex = (prev + 1) % photos.length;
-          setCurrentPhrase(lovePhrases[newIndex]); // Atualiza a frase junto com a foto
+          setCurrentPhrase(lovePhrases[newIndex]); 
           return newIndex;
         });
-      }, 3000); // A cada 3 segundos
+      }, 3000); 
   
       return () => clearInterval(photoInterval);
     }
@@ -105,7 +105,6 @@ export default function WomenDayCard() {
 
   return (
     <div className="flex justify-center items-center h-screen bg-pink-100">
-      {/* Card inicial (antes do coração) */}
       {!showHeart && !showPhotos ? (
         <Card className="p-6 max-w-md text-center shadow-xl bg-gradient-to-r from-pink-100 to-white rounded-2xl overflow-auto max-h-screen relative">
           <motion.h1
@@ -174,8 +173,6 @@ export default function WomenDayCard() {
           </CardContent>
         </Card>
       ) : null}
-
-      {/* Coração */}
       {showHeart && !showPhotos && (
         <motion.div
           className="flex justify-center items-center absolute top-0 left-0 w-full h-full rounded-lg z-0"
@@ -184,32 +181,32 @@ export default function WomenDayCard() {
           transition={{ duration: 1 }}
         >
           <div className="relative w-48 h-48 flex justify-center items-center">
-            {/* Círculo que vai crescer e desaparecer */}
+       
             <motion.div
               className="absolute w-48 h-48 rounded-full bg-gradient-to-r from-pink-500 to-red-500 z-0"
               animate={{
-                scale: [1, 4], // Aumenta o tamanho do círculo para 4x
-                opacity: [1, 0], // O círculo vai desaparecer gradualmente
+                scale: [1, 4], 
+                opacity: [1, 0], 
               }}
               transition={{
-                duration: 4, // A transição agora é de 4 segundos, tornando o efeito mais lento
-                ease: "easeOut", // Transição suave
+                duration: 4, 
+                ease: "easeOut", 
               }}
             />
-            {/* Coração pulsante */}
+
             <motion.svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              className="w-36 h-36 z-10" // Aumentei o tamanho do coração para 36
+              className="w-36 h-36 z-10" 
               animate={{
-                scale: [1, 1.15, 1], // O coração pulsa entre 1x e 1.15x de tamanho
+                scale: [1, 1.15, 1], 
               }}
               transition={{
-                duration: 1.5, // Pulsação a cada 1.5 segundos
-                repeat: Infinity, // Repetir infinitamente
-                ease: "easeInOut", // Pulsação suave
+                duration: 1.5, 
+                repeat: Infinity, 
+                ease: "easeInOut", 
               }}
             >
               <path
@@ -222,19 +219,19 @@ export default function WomenDayCard() {
         </motion.div>
       )}
 
-      {/* Contagem regressiva */}
+
       {showHeart && !showPhotos && (
         <div className="absolute bottom-10 text-4xl text-black">
           {countdown} segundos restantes...
         </div>
       )}
 
-      {/* Exibição das fotos e frases */}
+  
       {showPhotos && (
         <div className="absolute flex flex-col items-center">
           <motion.img
-            key={photos[photoIndex]} // Usando a chave para garantir que a troca da imagem seja feita corretamente
-            src={photos[photoIndex]} // A foto exibida vai mudar conforme o índice
+            key={photos[photoIndex]} 
+            src={photos[photoIndex]} 
             alt={`Foto ${photoIndex + 1}`}
             className="w-96 h-96 rounded-full object-cover mb-4"
             initial={{ opacity: 0 }}
@@ -247,7 +244,7 @@ export default function WomenDayCard() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            {currentPhrase} {/* Exibe a frase correspondente à foto */}
+            {currentPhrase} 
           </motion.p>
         </div>
       )}
